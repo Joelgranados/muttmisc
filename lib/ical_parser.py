@@ -11,7 +11,6 @@ class IcalParser:
     ical_events=[]
 
     def __init__(self, msg_str):
-        print(msg_str)
         e_msgs = email.message_from_string(msg_str)
         for e_msg in e_msgs.walk():
             try:
@@ -63,12 +62,16 @@ class IcalParser:
         end = ical_vevent.get('dtend').dt
         location = str(ical_vevent.get('location'))
         description = str(ical_vevent.get('description'))
+        attendee = ical_vevent.get('attendee')
         if description == 'None':
             description = "No Description available"
-        if isinstance(ical_vevent['attendee'], str):
-            invitees = [ical_vevent['attendee']]
-        else :
-            invitees = [str(x) for x in ical_vevent['attendee']]
+        if attendee is None:
+            invitees = ["No Atendees available"]
+        else:
+            if isinstance(attendee, str):
+                invitees = [ical_vevent['attendee']]
+            else:
+                invitees = [str(x) for x in attendee]
 
         ret_str = "="*70
         ret_str += "\n"
