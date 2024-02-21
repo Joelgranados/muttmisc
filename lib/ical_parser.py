@@ -87,7 +87,8 @@ class IcalParser:
         ret_str += "\n"
         ret_str +="Location:\n\t%s" % location.encode('utf-8')
         ret_str += "\n"
-        ret_str +="---\n%s\n---" % description.encode('utf-8')
+        ret_str +="---\n%s\n---" % description
+        #ret_str +="---\n%s\n---" % description.encode('utf-8')
         ret_str += "\n"
         ret_str +="Invitees:"
         ret_str += "\n"
